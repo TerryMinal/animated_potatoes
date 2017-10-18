@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LL.h"
 
 struct node {
@@ -19,8 +20,8 @@ void print_list(struct node *node) {
 
 struct node * insert_front(struct node *front, char new_name[], char new_artist[]) {
   struct node *new_front = (struct node *) malloc(sizeof(new_front));
-  new_front->name = new_name;
-  new_front->artist = new_artist;
+  strcpy(new_front->name, new_name);
+  strcpy(new_front->artist , new_artist);
   new_front->next = front;
   return new_front;
 }

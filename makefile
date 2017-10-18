@@ -8,7 +8,13 @@ tg: tg.c LL.c LL.h
 	gcc -o tg tg.c
 
 qx: qx.c LL.c LL.h
-		gcc -o qx qx.c 
+		gcc -o qx qx.c
+
+runtg: tg
+	./tg
+	
+runqx: qx
+	./qx
 
 run: all
 	./LL
