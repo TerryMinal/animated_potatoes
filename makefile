@@ -12,7 +12,7 @@ qx: qx.c LL.c LL.h
 
 runtg: tg
 	./tg
-	
+
 runqx: qx
 	./qx
 
@@ -20,6 +20,6 @@ run: all
 	./LL
 
 clean:
-	rm *.o
-	rm *~
 	rm *.gch
+	rm *~
+	rm *.o
