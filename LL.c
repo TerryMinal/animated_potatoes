@@ -4,7 +4,7 @@
 #include "LL.h"
 
 struct node {
-  char name[256];
+  char song[256];
   char artist[256];
   struct node *next;
 };
@@ -12,16 +12,22 @@ struct node {
 void print_list(struct node *node) {
   struct node *current_node = node;
   while (current_node != NULL) {
-    printf("artist: %s | song: %s" , current_node->artist, current_node->name);
+    printf(" artist: %s | song: %s " , current_node->artist, current_node->song);
     current_node = current_node->next;
   }
   return;
 }
 
-struct node * insert_front(struct node *front, char new_name[], char new_artist[]) {
-  struct node *new_front = (struct node *) malloc(sizeof(new_front));
-  strcpy(new_front->name, new_name);
-  strcpy(new_front->artist , new_artist);
+// default sets the node next to NULL
+struct node * make_node(char new_artist[], char new_song[]) {
+  struct node *node = (struct node *) malloc(sizeof(struct node));
+  strcpy(node->song, new_song);
+  strcpy(node->artist , new_artist);
+  node->next = NULL;
+  return node;
+}
+struct node * insert_front(struct node *front, char new_artist[], char new_song[]) {
+  struct node *new_front = make_node(new_artist, new_song);
   new_front->next = front;
   return new_front;
 }
