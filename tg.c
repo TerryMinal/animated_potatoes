@@ -3,6 +3,15 @@
 #include <string.h>
 #include "LL.c"
 
+//insert in order
+// struct node * insert(struct node * node);
+
+//returns node based on artist and song song
+// struct node * return_node(char artist[], char song_song[]);
+
+//returns first song based on artist
+// struct node * return_first_song(char artist[]);
+
 // struct node * insert(struct node *front, struct node *node) {
 //   struct node * current_node = front;
 //   struct node * previous;

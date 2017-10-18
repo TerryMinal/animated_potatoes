@@ -3,6 +3,14 @@
 #include <string.h>
 #include "LL.c"
 
+// to be done:
+//returns random element
+// struct node * return_random();
+
+//removes a single specified node
+// struct node * remove_node(struct node * node);
+
+
 int main() {
   struct node *front = malloc(sizeof(struct node));
   front = make_node("a", "b");
