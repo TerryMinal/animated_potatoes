@@ -7,7 +7,7 @@ void print_list(struct node *front);
 // create a new node and put it at the beginning of the list.
 // The second argument should match whatever data you contain in your nodes.
 // Returns a pointer to the beginning of the list.
-struct node * insert_front(struct node *front, char[] new_name, char[] new_artist);
+struct node * insert_front(struct node *front, char new_name[], char new_artist[]);
 
 // Should take a pointer to a list as a parameter and then go through
 // the entire list freeing each node and return a pointer to the beginning of the
@@ -18,13 +18,13 @@ struct node * free_list(struct node *front);
 struct node * insert(struct node * node);
 
 //returns node based on artist and song name
-struct node * return_node(char[] artist, char[] song_name);
+struct node * return_node(char artist[], char song_name[]);
 
 //returns first song based on artist
-struct node * return_first_song(char[] artist);
+struct node * return_first_song(char artist[]);
 
 //returns random element
 struct node * return_random();
 
 //removes a single specified node
-struct node * remove(struct node * node);
+struct node * remove_node(struct node * node);
