@@ -18,7 +18,7 @@ struct node * insert_front(struct node *front, char new_artist[], char new_song[
 struct node * free_list(struct node *front);
 
 //insert in order
-struct node * insert(struct node * node);
+struct node * insert(struct node *front, char artist[], char song[]);
 
 //returns node based on artist and song song
 struct node * return_node(char artist[], char song_song[]);

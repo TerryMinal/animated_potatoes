@@ -12,7 +12,7 @@ struct node {
 void print_list(struct node *node) {
   struct node *current_node = node;
   while (current_node != NULL) {
-    printf(" artist: %s | song: %s " , current_node->artist, current_node->song);
+    printf(" artist: %s | song: %s \n" , current_node->artist, current_node->song);
     current_node = current_node->next;
   }
   return;
