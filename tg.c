@@ -74,6 +74,7 @@ int main() {
   printf("debugging return_first_song...\n");
   d = return_first_song(front, "d");
   print_node(d);
+  free(d);
   front = free_list(front);
   // printf("printing after list has been freed:\n");
   // print_list(front);

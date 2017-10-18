@@ -38,12 +38,11 @@ struct node * insert_front(struct node *front, char new_artist[], char new_song[
 }
 
 struct node * free_list(struct node *node) {
-  struct node *current_node = node;
-  struct node *temp;
-  while (current_node != NULL) {
-    temp = current_node->next;
-    free(current_node);
-    current_node = temp;
+  struct node *temp = NULL;
+  while ( node != NULL) {
+    temp = node->next;
+    free(node);
+    node = temp;
   }
   return NULL;
 }
