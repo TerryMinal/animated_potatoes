@@ -1,11 +1,11 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "LL.h"
 
 struct node {
-  char name[256]; 
+  char name[256];
   char artist[256];
-  struct node *next; 
+  struct node *next;
 };
 
 void print_list(struct node *node) {
@@ -20,7 +20,7 @@ void print_list(struct node *node) {
 struct node * insert_front(struct node *front, char[] new_name, char[] new_artist) {
   struct node *new_front = (struct node *) malloc(sizeof(new_front));
   new_front->name = new_name;
-  new_front->artist = new_artist; 
+  new_front->artist = new_artist;
   new_front->next = front;
   return new_front;
 }
@@ -38,13 +38,13 @@ struct node * free_list(struct node *node) {
 
 struct node * insert(struct node *front, struct node *node) {
   struct node * current_node = front;
-  struct node * previous; 
+  struct node * previous;
   while (current_node != NULL) {
     if (strcmp(current_node->artist, node->artist) <= 0) {
       node->next = current_node;
       previous->next = node;
     }
-    previous = current_node; 
+    previous = current_node;
     current_node = current_node->next;
   }
 }

@@ -1,4 +1,4 @@
- struct node;
+struct node;
 // Should take a pointer to a node struct
 // and print out all of the data in the list
 void print_list(struct node *front);
@@ -18,15 +18,13 @@ struct node * free_list(struct node *front);
 struct node * insert(struct node * node);
 
 //returns node based on artist and song name
-struct node * return_node(char[] artist, char[] song_name); 
+struct node * return_node(char[] artist, char[] song_name);
 
 //returns first song based on artist
-struct node * return_first_song(char[] artist); 
+struct node * return_first_song(char[] artist);
 
 //returns random element
 struct node * return_random();
 
 //removes a single specified node
-struct node * remove(struct node * node); 
-
- 
+struct node * remove(struct node * node);

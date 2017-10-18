@@ -1,4 +1,4 @@
- all: LL.h LL.c
+all: LL.h LL.c
 	gcc -o LL LL.c
 
 LL.o: LL.h
