@@ -21,10 +21,10 @@ struct node * free_list(struct node *front);
 struct node * insert(struct node *front, char artist[], char song[]);
 
 //returns node based on artist and song song
-struct node * return_node(char artist[], char song_song[]);
+struct node * return_node(struct node *front, char artist[], char song_song[]);
 
 //returns first song based on artist
-struct node * return_first_song(char artist[]);
+struct node * return_first_song(struct node *front, char artist[]);
 
 //returns random element
 struct node * return_random();
