@@ -9,10 +9,15 @@ struct node {
   struct node *next;
 };
 
+void print_node(struct node *node) {
+  printf(" artist: %s | song: %s \n" , node->artist, node->song);
+  return;
+}
+
 void print_list(struct node *node) {
   struct node *current_node = node;
   while (current_node != NULL) {
-    printf(" artist: %s | song: %s \n" , current_node->artist, current_node->song);
+    print_node(current_node);
     current_node = current_node->next;
   }
   return;
