@@ -14,8 +14,7 @@ void print_node(struct node *node) {
   return;
 }
 
-void print_list(struct node *node) {
-  struct node *current_node = node;
+void print_list(struct node *current_node) {
   while (current_node != NULL) {
     print_node(current_node);
     current_node = current_node->next;

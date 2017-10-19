@@ -13,10 +13,9 @@
 //returns first song based on artist
 // struct node * return_first_song(char artist[]);
 
-struct node * insert(struct node *front, char artist[], char song[]) {
+struct node * insert(struct node *current_node, char artist[], char song[]) {
   struct node *node = make_node(artist, song);
-  struct node *current_node = front;
-  struct node *previous = front;
+  struct node *previous = current_node;
   while (current_node != NULL && strcmp(node->artist, current_node->artist) >= 0) {
     previous = current_node;
     current_node = current_node->next;
@@ -38,8 +37,7 @@ struct node * insert(struct node *front, char artist[], char song[]) {
 }
 
 //returns node based on artist and song
-struct node * return_node(struct node *front, char artist[], char song[]) {
-  struct node *current_node = front;
+struct node * return_node(struct node *current_node, char artist[], char song[]) {
   struct node *ret_node = NULL;
   while (current_node != NULL) {
     if (strcmp(current_node->artist, artist) == 0 && strcmp(current_node->song, song) == 0)
@@ -50,8 +48,7 @@ struct node * return_node(struct node *front, char artist[], char song[]) {
 }
 
 //returns first song based on artist
-struct node * return_first_song(struct node *front, char artist[]) {
-  struct node *current_node = front;
+struct node * return_first_song(struct node *current_node, char artist[]) {
   struct node *ret_node = NULL;
   while (current_node != NULL) {
     if (strcmp(current_node->artist, artist) == 0)
@@ -64,8 +61,7 @@ struct node * return_first_song(struct node *front, char artist[]) {
 
 int main() {
   printf("\n"); //space between output of makefile and output of this file
-  struct node *front = malloc(sizeof(struct node));
-  front = make_node("d", "e");
+  struct node *front = make_node("d", "e");
   front = insert(front, "a", "b");
   // print_list(front);
   printf("debugging return_node...\n");
@@ -75,7 +71,8 @@ int main() {
   d = return_first_song(front, "d");
   print_node(d);
   free(d);
-  front = free_list(front);
+  free_list(front);
+  front = NULL;
   // printf("printing after list has been freed:\n");
   // print_list(front);
   return 0;
