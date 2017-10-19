@@ -27,7 +27,7 @@ struct node * return_node(struct node *front, char artist[], char song_song[]);
 struct node * return_first_song(struct node *front, char artist[]);
 
 //returns random element
-struct node * return_random();
+struct node * return_random(struct node * front);
 
 //removes a single specified node
-struct node * remove_node(struct node * node);
+struct node * remove_node(struct node * node, struct node * front);
