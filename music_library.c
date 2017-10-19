@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "music_library.h"
 #include "LL.c"
+//queenie
 // Add song node
 struct node * add_song_node(struct node *song);
 
@@ -11,6 +12,7 @@ struct node * search(char artist[], char song[]);
 // print out all entries under a certain letter
 void print_under_letter(char letter);
 
+//queenie
 // print out all songs of a specific artist
 void print_artist_song(char artist[]);
 
@@ -20,9 +22,11 @@ void print_library();
 // print out a series of randomly chosen songs
 void shuffle();
 
+//queenie
 // delete a song
 void delete_song(char song[]);
 
+//queenie
 // delete all nodes
 void delete_nodes();
 
