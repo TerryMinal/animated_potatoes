@@ -138,6 +138,7 @@ int main() {
 
   /* ----------------------FREEING THE NODES OF THE LINKED LIST-------------------------*/  
   front = free_list(front);
+  free(temporary); 
   printf("printing after list has been freed:\n");
   print_list(front);
 
