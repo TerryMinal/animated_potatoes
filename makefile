@@ -26,4 +26,4 @@ run: all
 	./LL
 
 clean:
-	rm *.gch; rm *~; rm *.o; rm qx; rm tg; rm LL
+	rm *#; rm *.gch; rm *~; rm *.o; rm qx; rm tg; rm LL
