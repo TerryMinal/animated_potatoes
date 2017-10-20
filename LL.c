@@ -125,6 +125,8 @@ struct node * return_random(struct node * front) {
   //Iterate through the linked list for a rand_num amount of times.
   //Return the node that rand_num stopped at.
   while (rand_num) {
+    if (temp_node == NULL)
+      temp_node = front;
     temp_node = temp_node->next;
     rand_num--;
   }

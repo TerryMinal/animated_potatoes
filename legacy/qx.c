@@ -26,6 +26,9 @@ struct node * return_random(struct node * front) {
   //Iterate through the linked list for a rand_num amount of times.
   //Return the node that rand_num stopped at.
   while (rand_num) {
+    //case where the temp_node reaches the end of the linked list
+    if (temp_node == NULL)
+      temp_node = front;
     temp_node = temp_node->next;
     rand_num--;
   }
@@ -73,7 +76,7 @@ struct node * remove_node(char artist[], char song[], struct node *front) {
 
 int main() {
   struct node *front = make_node("a", "b");
-  // struct node *temporary;
+  struct node *temporary;
 
   /* -----------------------MAKING A LINKED LIST-------------------------*/
 
@@ -87,11 +90,11 @@ int main() {
   front = insert(front, "e", "f");
 
   /* -----------------------RETURNING A RANDOM NODE-------------------------*/
-  // temporary = front;
-  // printf("===============================\n");
-  // temporary = return_random(front);
-  // printf("Printing the randomly selected node: \nArtist: %s \nSong: %s \n", temporary->artist, temporary->song);
-  // free(temporary);
+  temporary = front;
+  printf("===============================\n");
+  temporary = return_random(front);
+  printf("Printing the randomly selected node: \nArtist: %s \nSong: %s \n", temporary->artist, temporary->song);
+  free(temporary);
 
   /* ----------------------REMOVING A RANDOM NODE-------------------------*/
 
