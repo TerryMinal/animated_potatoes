@@ -10,6 +10,9 @@ tg: tg.c LL.c LL.h
 qx: qx.c LL.c LL.h
 		gcc -g -o qx qx.c
 
+music_library.o: music_library.h
+	gcc -c music_library.h
+	
 runtg: tg
 	./tg
 
