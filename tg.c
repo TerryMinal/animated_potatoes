@@ -7,16 +7,16 @@
 
 //terry
 // search for a song given song and artist name
-struct node * search(char artist[], char song[]);
+struct node * search(char lib[], char artist[], char song[]);
 
 //terry
 // print out all entries under a certain letter
-void print_under_letter(char letter);
+void print_under_letter(char lib[], char letter);
 
 //terry
 // prints out the whole library
-void print_library();
+void print_library(char lib[]);
 
 //terry
 // print out a series of randomly chosen songs
-void shuffle();
+void shuffle(char lib[]);

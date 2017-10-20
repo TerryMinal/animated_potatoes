@@ -1,4 +1,5 @@
 struct node;
+
 // Add song node
 struct node * add_song_node(char lib[], struct node *song);
 
