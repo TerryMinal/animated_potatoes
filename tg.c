@@ -8,8 +8,10 @@
 struct node * add_song_node(struct node *lib[], char artist[], char song[]) {
   int index = (int) (artist[0] - 'a'); //taking advantage of every character being an int... set index through subtraction of different ascii values
   //if there is no linked list present in this index, make a new node
-  if (lib[index] == NULL)
+  if (lib[index] == NULL) { 
+    printf("%d", index); 
     lib[index] = make_node(artist, song);
+  }
   //else: add a node by order of artist
   else
     lib[index] = insert(lib[index], artist, song);
@@ -57,16 +59,26 @@ void shuffle(struct node *lib[]) {
   struct node *rand_node = return_random(lib[rand_num]);
   for (i = 0; i < 3; i++) {
     rand_num = rand()%26;
-    *rand_node = return_random(lib[rand_num]);
+    rand_node = return_random(lib[rand_num]);
     printf("artist: %s, song: %s\n", rand_node->artist, rand_node->song);
   }
   // printf("%d\n", rand_num);
 }
 
 int main() {
-  struct node *lib[26 * sizeof(struct node)];
+  struct node *lib[26];
   struct node *front = add_song_node(lib, "b", "oh yeah baby");
-  shuffle(lib);
+  srand(time(NULL)); 
+  int i;
+  char alphabet[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}; 
+  for (i = 0; i < 30; i++) {
+    char *art = (alphabet[(int) (rand()%26) ]);
+    char *son = (alphabet[(int) (rand()%26) ]);
+    printf("adding artist: %c, adding song: %c, for the %d time", art, son, i);
+    front = add_song_node(lib, art, son);
+  }
+  print_library(lib); 
+  //shuffle(lib);
   // print_library(lib);
   // search(lib, "b", "oh yeahbaby");
   // print_node(search(lib, "b", "oh yeahbaby"));
