@@ -30,4 +30,4 @@ struct node * return_first_song(struct node *current_node, char artist[]);
 struct node * return_random(struct node * front);
 
 //removes a single specified node
-struct node * remove_node(struct node * node, struct node * front);
+struct node * remove_node(char artist[], char song[], struct node * front);

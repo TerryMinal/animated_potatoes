@@ -3,7 +3,6 @@
 #include <string.h>
 #include "LL.h"
 #include "LL.c"
-
 //insert in order
 // struct node * insert(struct node * node);
 
@@ -58,7 +57,6 @@ struct node * return_first_song(struct node *current_node, char artist[]) {
   return ret_node;
 }
 
-
 int main() {
   printf("\n"); //space between output of makefile and output of this file
   struct node *front = make_node("d", "e");
@@ -70,9 +68,7 @@ int main() {
   printf("debugging return_first_song...\n");
   d = return_first_song(front, "d");
   print_node(d);
-  free(d);
-  free_list(front);
-  front = NULL;
+  front = free_list(front);
   // printf("printing after list has been freed:\n");
   // print_list(front);
   return 0;
