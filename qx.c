@@ -7,16 +7,16 @@
 
 //queenie
 // Add song node
-struct node * add_song_node(char lib[], struct node *song);
+struct node * add_song_node(struct node lib[], struct node *song);
 
 //queenie
 // print out all songs of a specific artist
-void print_artist_song(char lib[], char artist[]);
+void print_artist_song(struct node lib[], char artist[]);
 
 //queenie
 // delete a song
-void delete_song(char lib[], char song[]);
+void delete_song(struct node lib[], char song[]);
 
 //queenie
 // delete all nodes
-void delete_nodes(char lib[]);
+void delete_nodes(struct node lib[]);
