@@ -11,7 +11,10 @@ struct node {
 };
 
 void print_node(struct node *node) {
-  printf(" artist: %s | song: %s \n" , node->artist, node->song);
+  if (node == NULL)
+    printf("The node is null\n");
+  else
+    printf(" artist: %s | song: %s \n" , node->artist, node->song);
   return;
 }
 
