@@ -11,19 +11,17 @@ struct node {
 };
 
 void print_node(struct node *node) {
-  if (node == NULL)
+  if (!node)
     printf("The node is null\n");
   else
     printf(" artist: %s | song: %s \n" , node->artist, node->song);
-  return;
 }
 
 void print_list(struct node *current_node) {
-  while (current_node != NULL) {
+  while (current_node) {
     print_node(current_node);
     current_node = current_node->next;
   }
-  return;
 }
 
 // default sets the node next to NULL
@@ -152,7 +150,7 @@ struct node * remove_node(char artist[], char song[], struct node *front) {
   }
 
   //Else traverse through the list while the values of the current node is not the same as the values in the node that needs to be removed
-  while ( current != NULL && (strcmp(current->song, song) != 0) && (strcmp(current->artist, artist)) != 0 ) {
+  while ( current != NULL && (!strcmp(current->song, song)) && (!strcmp(current->artist, artist)) ) {
     //printf("Value inside previous node: \nArtist: %s \nSong: %s \n\n", previous->artist, previous->song);
 
     //Update the previous node

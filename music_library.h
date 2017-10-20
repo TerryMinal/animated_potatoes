@@ -19,7 +19,7 @@ void print_library(struct node *lib[]);
 void shuffle(struct node *lib[]);
 
 // delete a song
-void delete_song(struct node *lib[], char song[]);
+void delete_song(struct node *lib[], char artist[], char song[]);
 
 // delete all nodes
 void delete_nodes(struct node *lib[]);
