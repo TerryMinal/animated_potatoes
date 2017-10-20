@@ -7,7 +7,7 @@
 
 //queenie
 // Add song node
-struct node * add_song_node(struct node *lib[], struct node *song);
+struct node * add_song_node(struct node *lib[], char artist[], char song[]);
 
 //queenie
 // print out all songs of a specific artist
