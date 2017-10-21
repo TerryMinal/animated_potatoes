@@ -100,6 +100,7 @@ void delete_nodes(struct node *lib[]) {
   int index = 0;
   while (index < 27) {
     free_list(lib[index]);
+    print_list(lib[index]);
     index++;
   }
 }
