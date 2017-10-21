@@ -10,6 +10,7 @@ struct node {
   struct node *next;
 };
 
+//Prints one node: 
 void print_node(struct node *node) {
   if (node == NULL)
     printf("The node is null\n");
@@ -17,6 +18,7 @@ void print_node(struct node *node) {
     printf(" artist: %s | song: %s \n" , node->artist, node->song);
 }
 
+//Prints a list: 
 void print_list(struct node *current_node) {
   while (current_node != NULL) {
     print_node(current_node);
@@ -32,12 +34,15 @@ struct node * make_node(char new_artist[], char new_song[]) {
   node->next = NULL;
   return node;
 }
+
+//Inserts a node to the front of the list: 
 struct node * insert_front(struct node *front, char new_artist[], char new_song[]) {
   struct node *new_front = make_node(new_artist, new_song);
   new_front->next = front;
   return new_front;
 }
 
+//Frees a list: 
 struct node * free_list(struct node *node) {
   struct node *temp;
   while ( node != NULL) {
@@ -48,153 +53,34 @@ struct node * free_list(struct node *node) {
   return NULL;
 }
 
-// in the case that the node is inserted at the beginning, return the node. Else, return the front
-// this is to guarantee that there will always be a pointer to the front
-struct node * insert(struct node *current_node, char artist[], char song[]) {
-  
-}
-  /*  struct node *ret_node = current_node; 
-  struct node *node = make_node(artist, song);
-  struct node *previous = malloc(sizeof(struct node));*/ 
 
-  /*
-  if (current_node || ( strcmp(artist, current_node->artist) < 0 ) ) {
+//Inserts a node in the current order 
+struct node * insert(struct node *current_node, char artist[], char song[]) {
+ //case where there exists no node in the linked list
+  if (current_node == NULL) {
+    current_node = make_node(artist, song);
+    return current_node;
+  }
+  //case where the node belongs in the front
+  else if (strcmp(artist, current_node->artist) <= 0) {
     return insert_front(current_node, artist, song);
   }
-
-  while (current_node && (strcmp(artist, node->artist) >= 0)) {
-    if ( strcmp(artist, current_node->artist) == 0 ) {
-      if (strcmp(song, current_node->song) < 0) {
-	break;
-      }
-    }
-    previous = current_node; 
-    current_node = current_node->next; 
-  }
-
-  node->next = current_node;
-  previous->next = node;
-  return ret_node; 
-  }*/
-  
-
-
-
-/*
-  if ( (!current_node) || ( strcmp(artist, current_node->artist) < 0 ) ) {
-      return insert_front(current_node, artist, song);
-  }
-
-  while (current_node) {
-    if ( strcmp(artist, current_node->artist) == 0 ) {
-      while ( strcmp(song, current_node->song) > 0 ) {
-	current_node = current_node -> next;
-      }
-      node->next = current_node; 
-      previous->next = node;
-      //return insert_front(current_artist, ar; 
-    }
-
-    if ( strcmp(artist, current_node->artist) < 0 ){
-      return insert_front(current_node, artist, song);
-    } 
-    
-    else {
-      previous = current_node;
-      current_node = current_node->next;
-    }
-  }
-  //node->next = previous->next;
-  previous->next = insert_front(current_node, artist, song);
-  return ret_node; 
-}
-  
-  /*   
-  //case where there is no node in the linked list
-  if (current_node == NULL)  {
-    current_node = node;
-    return node;
-  }
-  //case where there is 1 node in the linked list
-  else if (current_node->next == NULL) {
-    if(strcmp(artist, current_node->artist) >= 0) {
-      current_node->next = node;
-      return current_node;
-    }
-    else {
-      node->next = current_node;
-      return node;
-    }
-  }
-  //case where there is more than 1 node in a list
+  //case where the node belongs after the front
   else {
     struct node *previous = current_node;
-    struct node *front = current_node;
-    while (current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
+    while(current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
       previous = current_node;
       current_node = current_node->next;
     }
+    
+    struct node *node = make_node(artist, song);
     previous->next = node;
     node->next = current_node;
-    return front;
   }
-  */
-  // while (current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
-  //   previous = current_node;
-  //   current_node = current_node->next;
-  // }
-  // // this checks whether its the first node
-  // if (previous == NULL) {
-  //   // if the node should go after the first node
-  //   if (strcmp(artist, current_node->artist) >= 0) {
-  //     node->next = current_node->next;
-  //     current_node->next = node;
-  //     return front;
-  //   }
-  //   else {
-  //     node->next = current_node;
-  //     return node;
-  //   }
-  // }
-  // // in the case where youre not entering at the front
-  // else {
-  //   previous->next = node;
-  //   node->next = current_node;
-  //   return front;
-  // }
-//returns node based on artist and song
-
-struct node * return_node(struct node *current_node, char artist[], char song[]) {
-  struct node *ret_node = NULL;
-  while (current_node != NULL) {
-    if (strcmp(current_node->artist, artist) == 0 && strcmp(current_node->song, song) == 0)
-    ret_node = current_node;
-    current_node = current_node->next;
-  }
-  return ret_node;
+  return current_node;
 }
 
-//returns first song based on artist
-// if there is a node returns a pointer to it
-// else returns null
-struct node * return_first_song(struct node *current_node, char artist[]) {
-  struct node *ret_node = NULL;
-  while (current_node != NULL) {
-    if (strcmp(current_node->artist, artist) == 0)
-    ret_node = current_node;
-    current_node = current_node->next;
-  }
-  return ret_node;
-}
-
-
-// to be done:
-//returns random element
-// struct node * return_random();
-
-//removes a single specified node
-// struct node * remove_node(struct node * node);
-
+//Returns a randomly selected node
 struct node * return_random(struct node * front) {
   //printf("Running return_random\n");
 
@@ -210,73 +96,58 @@ struct node * return_random(struct node * front) {
   //Iterate through the linked list for a rand_num amount of times.
   //Return the node that rand_num stopped at.
   while (rand_num) {
-    if (temp_node == NULL)
-      temp_node = front;
-    temp_node = temp_node->next;
+    printf("working\n");
+    
+    if (!temp_node->next) {
+      printf("yes next\n");
+      temp_node = temp_node->next;
+    }
+
+    else {
+      printf("breaking");
+      break;
+    }
+    
     rand_num--;
   }
-
+  
   return temp_node;
 }
 
+
 // returns a pointer to the front
+//Removes a selected node
 struct node * remove_node(char artist[], char song[], struct node *front) {
   struct node * current = front;
   struct node * previous = front;
 
   //If the node that needs to be removed is the first node in the list:
-  if ( ( strcmp (front->song, song) == 0 ) && ( strcmp (front->artist, artist) ) == 0) {
-    front  = front->next;
-    free(current); //freeing current b/c its a temp var holding front
-
-    //print_list(front);
-    return front;
+  if  ( current->song == song && current->artist == artist ) {
+    printf("yes");
+    
+    front = front->next;
   }
 
   //Else traverse through the list while the values of the current node is not the same as the values in the node that needs to be removed
-  while ( current != NULL && (!strcmp(current->song, song)) && (!strcmp(current->artist, artist)) ) {
-    //printf("Value inside previous node: \nArtist: %s \nSong: %s \n\n", previous->artist, previous->song);
+  while ( current ) {
+    if ( current->song == song && current->artist == artist ) {
+      previous -> next = current->next;
+      struct node * temp = current;
+      free(temp);
+      temp = NULL;
+      break;
+    }
 
-    //Update the previous node
     previous = current;
-
-    //Move the current one node forward
     current = current->next;
-    //printf("Value inside temp_node node: \nArtist: %s \nSong: %s \n\n", current->artist, current->song);
   }
-
-  //When loop is done:
-  //Set the next node of the node before the target to the node after the target.
-  //EX: A->B->C, Want to remove B, Set A's next node to C and remove B : A->C
-  // case in which the node was not found and therefore not removed
-  if (current == NULL)
-    return front;
-  previous->next = current->next;
-  free(current);
   return front;
+  
+      
+  
 }
 
-int main() {
-  struct node *front = malloc(5*sizeof(*front));
-  front = insert(front, "a", "acdc");
-  print_list(front);
-  front = insert(front, "b", "alala");
-  print_list(front);
-  front = insert(front, "c", "cats");
-  print_list(front);
-  front = insert(front, "ab", "avdc");
-  print_list(front);
-   
-//   front->value = 0;
-//   front->next = NULL;
-//   int i;
-//   for (i = 100; i > 0; i--) {
-//     front = insert_front(front, i);
-//   }
-   print_list(front);
-   free_list(front);
+ 
 
-   //   printf("printing after list has been freed:\n");
-//   print_list(front);
-   return 0;
- }
+
+

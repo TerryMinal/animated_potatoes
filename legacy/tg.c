@@ -111,7 +111,7 @@ struct node * free_list(struct node *node) {
   }
   return NULL;
 }
-
+/*
 int main() {
   printf("\n"); //space between output of makefile and output of this file
 
@@ -147,3 +147,4 @@ int main() {
   // print_list(front);
   return 0;
 }
+*/

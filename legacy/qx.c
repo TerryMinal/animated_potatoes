@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "LL.c"
+#include "tg.c"
 #include <time.h>
 
 // to be done:
@@ -80,14 +80,16 @@ int main() {
 
   /* -----------------------MAKING A LINKED LIST-------------------------*/
 
-  int i;
+  /*  int i;
 
   //Creating a linked list of nodes
   for (i = 10; i > 0; i--) {
     front = insert(front, "blank", "blank");
   }
 
+  */
   front = insert(front, "e", "f");
+ 
 
   /* -----------------------RETURNING A RANDOM NODE-------------------------*/
   temporary = front;
