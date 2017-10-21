@@ -185,9 +185,18 @@ int main() {
   print_library(lib);
 
   printf("\n==============================\n");
-  printf("Testing search: searching for sam smith's too good for goodbyes \n");
+  printf("Testing search:\n"); 
+  printf("Searching for sam smith's too good for goodbyes \n");
   search_node = search(lib, "sam smith", "Too Good for Goodbyes");
-  printf("Artist in search: %s, Song in search: %s\n", search_node->artist, search_node->song);
+  printf("Found! Artist in search: %s, Song in search: %s\n", search_node->artist, search_node->song);
+
+  printf("\nSearching for khalid's Location \n");
+  search_node = search(lib, "khalid", "Location");
+  printf("Found! Artist in search: %s, Song in search: %s\n", search_node->artist, search_node->song);
+
+  printf("\nSearching for hairspray's You Can't Stop the Beat\n");
+  search_node = search(lib, "hairspray", "You Can't Stop the Beat");
+  printf("Found! Artist in search: %s, Song in search: %s\n", search_node->artist, search_node->song);
 
   printf("\n==============================\n");
   printf("Testing print_under_letter: printing all artists under t\n");
