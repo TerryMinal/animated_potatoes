@@ -29,7 +29,7 @@ struct node * search(struct node *lib[], char artist[], char song[]) {
 // print out all entries under a certain letter
 void print_under_letter(struct node *lib[], char letter) {
   int index = (int) ('z' - letter); //set index through subtraction of ascii values
-  printf("%d", index);
+  //printf("%d", index);
   print_list(lib[index]); 
 }
 
@@ -161,11 +161,11 @@ int main() {
   printf("Updated list: \n");
   print_list(front);
 
-  printf("================================================\n");
+  /*printf("================================================\n");
   printf("Testing free_list: \n");
   front = free_list(front);
   print_list(front);
-
+  */
   printf("\n==============TESTING MUSIC LIBRARY=================\n");
   
   printf("\nAdding more songs:\n");
@@ -208,7 +208,7 @@ int main() {
   printf("Updated library: \n");
   print_library(lib);
 
-  printf("\nTesting delete_song: Closer by the chainsmokers\n"); 
+  printf("\nTesting delete_song: Don't Let Me Down by the chainsmokers\n"); 
   delete_song(lib, "the chainsmokers", "Don't Let Me Down");
   printf("Updated library: \n");
   print_library(lib);
@@ -216,7 +216,7 @@ int main() {
   printf("\n=============================\n");
   printf("Testing delete_nodes: removing all from library\n"); 
   delete_nodes(lib);
-  printf("Updated library: \n"); 
+  printf("Updated library: \n");
   return 0;
    /* 
   printf("Testing delete_song:  \n");
