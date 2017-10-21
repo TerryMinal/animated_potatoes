@@ -61,9 +61,12 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
 
   while (current_node) {
     if ( strcmp(artist, current_node->artist) == 0 ) {
+      while ( strcmp(song, current_node->song) > 0 ) {
+	current_node = current_node -> next;
+      }
+      node->next = previous->next; 
       previous->next = node;
-      node->next = current_node;
-      return ret_node;
+      return; 
     }
 
     if ( strcmp(artist, current_node->artist) < 0 ){
@@ -75,6 +78,7 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
       current_node = current_node->next;
     }
   }
+  //node->next = previous->next;
   previous->next = insert_front(current_node, artist, song);
   return ret_node; 
 }
@@ -228,10 +232,14 @@ struct node * remove_node(char artist[], char song[], struct node *front) {
 int main() {
   struct node *front = malloc(5*sizeof(*front));
   front = insert(front, "a", "acdc");
+  print_list(front);
   front = insert(front, "b", "alala");
+  print_list(front);
   front = insert(front, "c", "cats");
+  print_list(front);
   front = insert(front, "ab", "avdc");
-  
+  print_list(front);
+   
 //   front->value = 0;
 //   front->next = NULL;
 //   int i;
