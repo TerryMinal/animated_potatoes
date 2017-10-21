@@ -1,5 +1,5 @@
-all: LL.h LL.c
-	gcc -o LL LL.c
+all: music_library.c music_library.o LL.h LL.c
+	gcc -o music_library music_library.c
 
 LL.o: LL.h
 	gcc -c LL.h
@@ -12,7 +12,7 @@ qx: qx.c LL.c LL.h
 
 music_library.o: music_library.h
 	gcc -c music_library.h
-	
+
 runtg: tg
 	./tg
 
@@ -26,7 +26,7 @@ debugqx: qx
 	valgrind --leak-check=yes ./qx
 
 run: all
-	./LL
+	./music_library
 
 clean:
 	rm *\#; rm *.gch; rm *~; rm *.o; rm qx; rm tg; rm LL; rm vgcore*

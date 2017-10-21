@@ -11,14 +11,14 @@ struct node {
 };
 
 void print_node(struct node *node) {
-  if (!node)
+  if (node == NULL)
     printf("The node is null\n");
   else
     printf(" artist: %s | song: %s \n" , node->artist, node->song);
 }
 
 void print_list(struct node *current_node) {
-  while (current_node) {
+  while (current_node != NULL) {
     print_node(current_node);
     current_node = current_node->next;
   }
@@ -52,31 +52,57 @@ struct node * free_list(struct node *node) {
 // this is to guarantee that there will always be a pointer to the front
 struct node * insert(struct node *current_node, char artist[], char song[]) {
   struct node *node = make_node(artist, song);
-  struct node *previous = NULL;
-  struct node *front = current_node;
-  while (current_node != NULL && strcmp(node->artist, current_node->artist) >= 0) {
-    previous = current_node;
-    current_node = current_node->next;
+  //case where there is no node in the linked list
+  if (current_node == NULL)  {
+    current_node = node;
+    return node;
   }
-  // this checks whether its the first node
-  if (previous == NULL) {
-    // if the node should go after the first node
-    if (strcmp(node->artist, current_node->artist) >= 0) {
-      node->next = current_node->next;
+  //case where there is 1 node in the linked list
+  else if (current_node->next == NULL) {
+    if(strcmp(artist, current_node->artist) >= 0) {
       current_node->next = node;
-      return front;
+      return current_node;
     }
     else {
       node->next = current_node;
       return node;
     }
   }
-  // in the case where youre not entering at the front
+  //case where there is more than 1 node in a list
   else {
+    struct node *previous = current_node;
+    struct node *front = current_node;
+    while (current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
+      previous = current_node;
+      current_node = current_node->next;
+    }
     previous->next = node;
     node->next = current_node;
     return front;
   }
+  // while (current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
+  //   previous = current_node;
+  //   current_node = current_node->next;
+  // }
+  // // this checks whether its the first node
+  // if (previous == NULL) {
+  //   // if the node should go after the first node
+  //   if (strcmp(artist, current_node->artist) >= 0) {
+  //     node->next = current_node->next;
+  //     current_node->next = node;
+  //     return front;
+  //   }
+  //   else {
+  //     node->next = current_node;
+  //     return node;
+  //   }
+  // }
+  // // in the case where youre not entering at the front
+  // else {
+  //   previous->next = node;
+  //   node->next = current_node;
+  //   return front;
+  // }
 }
 
 //returns node based on artist and song
