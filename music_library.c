@@ -10,7 +10,6 @@ struct node * add_song_node(struct node *lib[], char artist[], char song[]) {
 
   int index = (int)((artist[0] - 'a')); //taking advantage of every character being an int... set index through subtraction of different ascii values
   lib[index] = insert(lib[index], artist, song);
-  
   return lib[index];
 }
 
@@ -121,85 +120,51 @@ int main() {
   for (i = 0; i < 27; i++) {
     lib[i] = NULL;
   }
-  printf("\n===============================\n");
-  printf("Adding songs:\n"); 
-  front = add_song_node(lib, "ed sheeran", "Afire Love");
-  printf("Current library:\n");
-  printf("Testing print_list, print_node, and print_lib (they're incorporated in each other\n:");
-  printf("Testing add_song_node, insert and insert_front:\n"); 
-  print_library(lib); 
-  printf("\nAdding more songs:\n");
-  /*
-  front = add_song_node(lib, "a", "abcd");
-  front = add_song_node(lib, "b", "bananar");
-  front = add_song_node(lib, "c", "cats");
-  front = add_song_node(lib, "d", "dogs");
-  front = add_song_node(lib, "e", "elephants");
-  front = add_song_node(lib, "f", "ferrets");
-  front = add_song_node(lib, "g", "giraffe");
-  front = add_song_node(lib, "h", "hihi");
-  front = add_song_node(lib, "i", "igloo");
-  front = add_song_node(lib, "j", "jelly beans");
-  front = add_song_node(lib, "high school musical", "Breaking Free");
-  
-  front = add_song_node(lib, "hairspray", "You Can't Stop the Beat");
-  front = add_song_node(lib, "dJ hhaled", "I'm the One");
-  front = add_song_node(lib, "drake", "Fake Love");
-  */
-  front = add_song_node(lib, "sam smith", "Too Good for Goodbyes");
-  
-  front = add_song_node(lib, "sam smith", "I Know I'm Not the Only One");
-  
-  front = add_song_node(lib, "the chainsmokers", "Closer");
-  front = add_song_node(lib, "the chainsmokers", "Paris");
-  front = add_song_node(lib, "the chainsmokers", "Don't Let Me Down");
-  front = add_song_node(lib, "the chainsmokers", "Roses");
-  front = add_song_node(lib, "khalid", "Location");
-  printf("Current library: \n");
-  print_library(lib);
-
-  printf("\n==============================\n");
-  printf("Testing search: searching for sam smith's too good for goodbyes \n");
-  search_node = search(lib, "sam smith", "Too Good for Goodbyes");
-  printf("Artist in search: %s, Song in search: %s\n", search_node->artist, search_node->song);
-
-  printf("\n==============================\n");
-  printf("Testing print_under_letter: printing all artists under t\n");
-  print_under_letter(lib, 't');
-
-  /*printf("\n==============================\n");
-  printf("Testing shuffle \n");
-  shuffle(lib); */
-
-  printf("\n=============================\n");
-  printf("Testing print_artist_song: printing all songs under khalid \n");
-  print_artist_song(lib, "khalid");
 
 
-  printf("\n=============================\n");
-  print_library(lib);
-  remove_node("the chainsmokers", "Paris", front);
-   print_library(lib);
-   /* 
-  printf("Testing delete_song:  \n");
-  delete_song(lib, "the chainsmokers", "Paris");
-  print_library(lib); */
+  printf("\n==============TESTING LINKED LIST=================\n");
+  printf("Testing insert_front\n"); 
+  front = insert_front(front, "a", "abcd");
+  print_list(front);
+  printf("================================================\n");
+  printf("Testing insert: \n"); 
+  front = insert(front, "c", "cats");
+  front = insert(front, "ed sheeran", "Afire Love");
+  front = insert(front, "b", "bananar");
+  front = insert(front, "d", "dogs");
+  front = insert(front, "e", "elephants");
+  front = insert(front, "f", "ferrets");
+  front = insert(front, "g", "giraffe");
+  front = insert(front, "h", "hihi");
+  front = insert(front, "i", "igloo");
+  front = insert(front, "j", "jelly beans");
+  print_list(front);
   
+  printf("================================================\n");
+  printf("Testing return_random\n");
+  struct node * temporary = return_random(front);
+  free(temporary);
+  printf("================================================\n");
+  printf("Testing remove_node: \n");
+  printf("Node to be removed: \nArtist: c \nSong: cats \n\n");
+  front = remove_node("c", "cats", front);
+  printf("Updated list: \n");
+  print_list(front);
+
+  printf("\nNode to be removed: \nArtist: f \nSong: ferrets \n\n");
+  front = remove_node("f", "ferrets", front);
+  printf("Updated list: \n");
+  print_list(front);
+
+  printf("\nNode to be removed: \nArtist: j \nSong: jelly beans \n\n");
+  front = remove_node("j", "jelly beans", front);
+  printf("Updated list: \n");
+  print_list(front);
+
+  printf("================================================\n");
+  printf("Testing free_list: \n");
+  front = free_list(front);
+  print_list(front);
   
-  
-  // Print_list(front);
-  // printf("debugging return_node...\n");
-  // struct node *d = return_node(front, "a", "b");
-  // print_node(d);
-  // printf("debugging return_first_song...\n");
-  // d = return_first_song(front, "d");
-  // print_node(d);
-  for (i = 0; i < 26; i++) {
-    free_list(lib[i]);
-    // printf("%s\n", str);
-    // add_song_node(lib, "i hate seg faults", "i hate seg faults");
-  }
-  // printf("printing after list has been freed:\n");
-  // print_list(front);
   return 0;
 }
