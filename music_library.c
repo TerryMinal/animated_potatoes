@@ -165,6 +165,62 @@ int main() {
   printf("Testing free_list: \n");
   front = free_list(front);
   print_list(front);
+
+  printf("\n==============TESTING MUSIC LIBRARY=================\n");
   
+  printf("\nAdding more songs:\n");
+ 
+  front = add_song_node(lib, "high school musical", "Breaking Free");
+  front = add_song_node(lib, "hairspray", "You Can't Stop the Beat");
+  front = add_song_node(lib, "dJ hhaled", "I'm the One");
+  front = add_song_node(lib, "drake", "Fake Love");
+  front = add_song_node(lib, "sam smith", "Too Good for Goodbyes");
+  front = add_song_node(lib, "sam smith", "I Know I'm Not the Only One");
+  front = add_song_node(lib, "the chainsmokers", "Closer");
+  front = add_song_node(lib, "the chainsmokers", "Paris");
+  front = add_song_node(lib, "the chainsmokers", "Don't Let Me Down");
+  front = add_song_node(lib, "the chainsmokers", "Roses");
+  front = add_song_node(lib, "khalid", "Location");
+  printf("Current library: \n");
+  print_library(lib);
+
+  printf("\n==============================\n");
+  printf("Testing search: searching for sam smith's too good for goodbyes \n");
+  search_node = search(lib, "sam smith", "Too Good for Goodbyes");
+  printf("Artist in search: %s, Song in search: %s\n", search_node->artist, search_node->song);
+
+  printf("\n==============================\n");
+  printf("Testing print_under_letter: printing all artists under t\n");
+  print_under_letter(lib, 't');
+
+  /*printf("\n==============================\n");
+  printf("Testing shuffle \n");
+  shuffle(lib); */
+
+  printf("\n=============================\n");
+  printf("Testing print_artist_song: printing all songs under khalid \n");
+  print_artist_song(lib, "khalid");
+
+
+  printf("\n=============================\n");
+  printf("Testing delete_song: deleting Paris by the chainsmokers\n"); 
+  delete_song(lib, "the chainsmokers", "Paris");
+  printf("Updated library: \n");
+  print_library(lib);
+
+  printf("\nTesting delete_song: Closer by the chainsmokers\n"); 
+  delete_song(lib, "the chainsmokers", "Don't Let Me Down");
+  printf("Updated library: \n");
+  print_library(lib);
+
+  printf("\n=============================\n");
+  printf("Testing delete_nodes: removing all from library\n"); 
+  delete_nodes(lib);
+  printf("Updated library: \n"); 
   return 0;
+   /* 
+  printf("Testing delete_song:  \n");
+  delete_song(lib, "the chainsmokers", "Paris");
+  print_library(lib); */
+
 }
