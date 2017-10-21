@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "LL.h"
-#include "LL.c"
+#include <time.h>
 //insert in order
 // struct node * insert(struct node * node);
 
@@ -12,28 +11,74 @@
 //returns first song based on artist
 // struct node * return_first_song(char artist[]);
 
-struct node * insert(struct node *current_node, char artist[], char song[]) {
-  struct node *node = make_node(artist, song);
-  struct node *previous = current_node;
-  while (current_node != NULL && strcmp(node->artist, current_node->artist) >= 0) {
-    previous = current_node;
+struct node {
+  char song[256];
+  char artist[256];
+  struct node *next;
+};
+
+void print_node(struct node *node) {
+  if (node == NULL)
+    printf("The node is null\n");
+  else
+    printf(" artist: %s | song: %s \n" , node->artist, node->song);
+}
+
+void print_list(struct node *current_node) {
+  while (current_node != NULL) {
+    print_node(current_node);
     current_node = current_node->next;
   }
-  if (previous == current_node) {
-    if (strcmp(node->artist, current_node->artist) >= 0) {
-      previous->next = node;
-      node->next = NULL;
-    }
-    else {
-      node->next = current_node;
-    }
+}
+
+
+struct node * make_node(char new_artist[], char new_song[]) {
+  struct node *node = (struct node *) malloc(sizeof(struct node));
+  strcpy(node->song, new_song);
+  strcpy(node->artist , new_artist);
+  node->next = NULL;
+  return node;
+}
+
+struct node * insert_front(struct node *front, char new_artist[], char new_song[]) {
+  struct node *new_front = make_node(new_artist, new_song);
+  new_front->next = front;
+  return new_front;
+}
+
+struct node * insert(struct node *current_node, char artist[], char song[]) {
+  //case where there exists no node in the linked list
+  if (current_node == NULL) {
+    current_node = make_node(artist, song);
+    return current_node;
   }
+  //case where the node belongs in the front
+  else if (strcmp(artist, current_node->artist) <= 0) {
+    return insert_front(current_node, artist, song);
+  }
+  //case where the node belongs after the front
   else {
+    struct node *previous = current_node;
+    while(current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
+      previous = current_node;
+      current_node = current_node->next;
+    }
+    struct node *node = make_node(artist, song);
     previous->next = node;
     node->next = current_node;
   }
-  return node;
 }
+
+struct node * add_song_node(struct node *lib[], char artist[], char song[]) {
+
+  int index = (int)((artist[0] - 'a')); //taking advantage of every character being an int... set index through subtraction of different ascii values
+  //if there is no linked list present in this index, make a new node
+  // printf("%d\n", index);
+  // lib[i] = insert(lib[i], art, son);
+  lib[index] = insert(lib[index], artist, song);
+  return lib[index];
+}
+
 
 //returns node based on artist and song
 struct node * return_node(struct node *current_node, char artist[], char song[]) {
@@ -57,18 +102,47 @@ struct node * return_first_song(struct node *current_node, char artist[]) {
   return ret_node;
 }
 
+struct node * free_list(struct node *node) {
+  struct node *temp;
+  while ( node != NULL) {
+    temp = node->next;
+    free(node);
+    node = temp;
+  }
+  return NULL;
+}
+
 int main() {
   printf("\n"); //space between output of makefile and output of this file
-  struct node *front = make_node("d", "e");
-  front = insert(front, "a", "b");
+
+  struct node *front;
+  // front = insert(front, "a", "b");
+  struct node *lib[27];
+  // struct node *front;// = add_song_node(lib, "b", "oh yeah baby");
+  srand(time(NULL));
+  int i;
+  char alphabet[] = "abcedfghijklmnopqrstuvwxyz";
+  for (i = 0; i < 26; i++) {
+    lib[i] = NULL;
+  }
+  for (i = 0; i < 26; i++) {
+    char *art = &(alphabet[ (int) (rand()%26) ]);
+    char *son = &(alphabet[ (int) (rand()%26) ]);
+    printf("inserting artist: %s, inserting song: %s, for the %d time\n", art, son, i);
+    add_song_node(lib, art , son);
+  }
   // print_list(front);
-  printf("debugging return_node...\n");
-  struct node *d = return_node(front, "a", "b");
-  print_node(d);
-  printf("debugging return_first_song...\n");
-  d = return_first_song(front, "d");
-  print_node(d);
-  front = free_list(front);
+  // printf("debugging return_node...\n");
+  // struct node *d = return_node(front, "a", "b");
+  // print_node(d);
+  // printf("debugging return_first_song...\n");
+  // d = return_first_song(front, "d");
+  // print_node(d);
+  for (i = 0; i < 26; i++) {
+    free_list(lib[i]);
+    // printf("%s\n", str);
+    // add_song_node(lib, "i hate seg faults", "i hate seg faults");
+  }
   // printf("printing after list has been freed:\n");
   // print_list(front);
   return 0;
