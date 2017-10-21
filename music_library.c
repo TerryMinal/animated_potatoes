@@ -100,7 +100,7 @@ void delete_nodes(struct node *lib[]) {
   int index = 0;
   while (index < 27) {
     free_list(lib[index]);
-    print_list(lib[index]);
+    //print_list(lib[index]);
     index++;
   }
 }
@@ -227,10 +227,17 @@ int main() {
   printf("Testing delete_nodes: removing all from library\n"); 
   delete_nodes(lib);
   printf("Updated library: \n");
-  return 0;
-   /* 
-  printf("Testing delete_song:  \n");
-  delete_song(lib, "the chainsmokers", "Paris");
-  print_library(lib); */
 
+  printf("\n==============TESTING MUSIC LIBRARY=================\n");
+  
+  printf("\nAdding more songs:\n");
+  front = add_song_node(lib, "bear", "paws");
+  front = add_song_node(lib, "blue", "skies");
+  front = add_song_node(lib, "hi", "bye");
+  print_library(lib);
+
+
+  
+  return 0;
 }
+
