@@ -51,10 +51,36 @@ struct node * free_list(struct node *node) {
 // in the case that the node is inserted at the beginning, return the node. Else, return the front
 // this is to guarantee that there will always be a pointer to the front
 struct node * insert(struct node *current_node, char artist[], char song[]) {
-  struct node *ret_node = current_node; 
+  
+}
+  /*  struct node *ret_node = current_node; 
   struct node *node = make_node(artist, song);
-  struct node *previous = current_node;
+  struct node *previous = malloc(sizeof(struct node));*/ 
 
+  /*
+  if (current_node || ( strcmp(artist, current_node->artist) < 0 ) ) {
+    return insert_front(current_node, artist, song);
+  }
+
+  while (current_node && (strcmp(artist, node->artist) >= 0)) {
+    if ( strcmp(artist, current_node->artist) == 0 ) {
+      if (strcmp(song, current_node->song) < 0) {
+	break;
+      }
+    }
+    previous = current_node; 
+    current_node = current_node->next; 
+  }
+
+  node->next = current_node;
+  previous->next = node;
+  return ret_node; 
+  }*/
+  
+
+
+
+/*
   if ( (!current_node) || ( strcmp(artist, current_node->artist) < 0 ) ) {
       return insert_front(current_node, artist, song);
   }
@@ -64,9 +90,9 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
       while ( strcmp(song, current_node->song) > 0 ) {
 	current_node = current_node -> next;
       }
-      node->next = previous->next; 
+      node->next = current_node; 
       previous->next = node;
-      return; 
+      //return insert_front(current_artist, ar; 
     }
 
     if ( strcmp(artist, current_node->artist) < 0 ){
@@ -137,6 +163,7 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
   //   return front;
   // }
 //returns node based on artist and song
+
 struct node * return_node(struct node *current_node, char artist[], char song[]) {
   struct node *ret_node = NULL;
   while (current_node != NULL) {
