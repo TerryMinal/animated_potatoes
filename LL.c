@@ -51,7 +51,35 @@ struct node * free_list(struct node *node) {
 // in the case that the node is inserted at the beginning, return the node. Else, return the front
 // this is to guarantee that there will always be a pointer to the front
 struct node * insert(struct node *current_node, char artist[], char song[]) {
+  struct node *ret_node = current_node; 
   struct node *node = make_node(artist, song);
+  struct node *previous = current_node;
+
+  if ( (!current_node) || ( strcmp(artist, current_node->artist) < 0 ) ) {
+      return insert_front(current_node, artist, song);
+  }
+
+  while (current_node) {
+    if ( strcmp(artist, current_node->artist) == 0 ) {
+      previous->next = node;
+      node->next = current_node;
+      return ret_node;
+    }
+
+    if ( strcmp(artist, current_node->artist) < 0 ){
+      return insert_front(current_node, artist, song);
+    } 
+    
+    else {
+      previous = current_node;
+      current_node = current_node->next;
+    }
+  }
+  previous->next = insert_front(current_node, artist, song);
+  return ret_node; 
+}
+  
+  /*   
   //case where there is no node in the linked list
   if (current_node == NULL)  {
     current_node = node;
@@ -80,6 +108,7 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
     node->next = current_node;
     return front;
   }
+  */
   // while (current_node != NULL && strcmp(artist, current_node->artist) >= 0) {
   //   previous = current_node;
   //   current_node = current_node->next;
@@ -103,8 +132,6 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
   //   node->next = current_node;
   //   return front;
   // }
-}
-
 //returns node based on artist and song
 struct node * return_node(struct node *current_node, char artist[], char song[]) {
   struct node *ret_node = NULL;
@@ -198,17 +225,23 @@ struct node * remove_node(char artist[], char song[], struct node *front) {
   return front;
 }
 
-// int main() {
-//   struct node *front = malloc(sizeof(*front));
+int main() {
+  struct node *front = malloc(5*sizeof(*front));
+  front = insert(front, "a", "acdc");
+  front = insert(front, "b", "alala");
+  front = insert(front, "c", "cats");
+  front = insert(front, "ab", "avdc");
+  
 //   front->value = 0;
 //   front->next = NULL;
 //   int i;
 //   for (i = 100; i > 0; i--) {
 //     front = insert_front(front, i);
 //   }
+   print_list(front);
+   free_list(front);
+
+   //   printf("printing after list has been freed:\n");
 //   print_list(front);
-//   free_list(front);
-//   printf("printing after list has been freed:\n");
-//   print_list(front);
-//   return 0;
-// }
+   return 0;
+ }
