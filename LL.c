@@ -39,6 +39,7 @@ struct node * make_node(char new_artist[], char new_song[]) {
 struct node * insert_front(struct node *front, char new_artist[], char new_song[]) {
   struct node *new_front = make_node(new_artist, new_song);
   new_front->next = front;
+  front = new_front; 
   return new_front;
 }
 
@@ -100,7 +101,7 @@ struct node * return_random(struct node * front) {
     if (temp_node == NULL) //if it reached the end of the linked list go back to the front
     temp_node = front;
     if (temp_node->next != NULL) //only counts the times we get an existing node
-    rand_num--;
+      rand_num--;
     temp_node = temp_node->next;
   }
 
@@ -161,7 +162,7 @@ struct node * free_list(struct node *node) {
   }
   return NULL;
 }
-// 
+//
 // int main() {
 //   return 0;
 // }

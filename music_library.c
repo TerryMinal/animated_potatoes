@@ -112,7 +112,6 @@ int main() {
     // printf("inserting artist: %s, inserting song: %s, for the %d time\n", art, son, i);
     add_song_node(lib, art , son);
   }
-  printf("\n=================debgugging free_list=============\n");
   printf("\n==============TESTING LINKED LIST=================\n");
   struct node *front;// = add_song_node(lib, "b", "oh yeah baby");
   printf("Testing insert_front\n");
@@ -120,16 +119,16 @@ int main() {
   print_list(front);
   printf("================================================\n");
   printf("Testing insert: \n");
-  front = insert(front, "c", "cats");
-  front = insert(front, "ed sheeran", "Afire Love");
-  front = insert(front, "b", "bananar");
-  front = insert(front, "d", "dogs");
-  front = insert(front, "e", "elephants");
-  front = insert(front, "f", "ferrets");
-  front = insert(front, "g", "giraffe");
-  front = insert(front, "h", "hihi");
-  front = insert(front, "i", "igloo");
-  front = insert(front, "j", "jelly beans");
+  insert(front, "c", "cats");
+  insert(front, "ed sheeran", "Afire Love");
+  insert(front, "b", "bananar");
+  insert(front, "d", "dogs");
+  insert(front, "e", "elephants");
+  insert(front, "f", "ferrets");
+  insert(front, "g", "giraffe");
+  insert(front, "h", "hihi");
+  insert(front, "i", "igloo");
+  insert(front, "j", "jelly beans");
   print_list(front);
 
   printf("================================================\n");
