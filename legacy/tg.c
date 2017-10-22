@@ -231,7 +231,7 @@ struct node * remove_node(struct node *front, char artist[], char song[]) {
 void delete_song(struct node *lib[], char artist[], char song[]) {
   int index =  (int)(artist[0] - 'a');
   // sets pointer to the front... this ensures that the front pointer always reflects a malloced node
-  lib[index] = remove_node(lib[index], artist, song);
+  *(lib + index) = remove_node(*(lib + index), artist, song);
 }
 
 //queenie
@@ -283,34 +283,37 @@ int main() {
   // for (i = 0; i < 26; i++) {
   //   print_artist_song(lib, artists[i]);
   // }
-  // printf("\n=================debgugging remove_node=============\n");
-  // struct node *front = make_node("a", "b");
-  // for (i = 0; i < 26; i++) {
-  //   insert(front, alphabet + i, alphabet + (26 - i));
-  // }
-  // printf("linked list before any removals\n");
-  // print_list(front);
-  // //removing artist z's song (last song)
-  // printf("removing artist %s, song %s\n", alphabet + 25, alphabet + 1);
-  // remove_node(front, alphabet + 25, alphabet + 1); //removing the artist z
-  //
-  // printf("list after removing z\n");
-  // print_list(front);
-  // //removing first song
-  // printf("removing first node\n");
-  // front = remove_node(front, "a", "b"); //removing the artist z
-  //
-  // printf("list after removing first node\n");
-  // print_list(front);
-  // //removing random nodes
-  // int rands;
-  // for (i = 0; i < 26; i++) {
-  //   rands = rand()%26;
-  //   printf("removing artist %s, song %s\n", alphabet + rands, alphabet + 26 - rands);
-  //   front = remove_node(front, alphabet + rands, alphabet + 26 - rands); //removing the artist
-  // }
-  // printf("list after removing random nodes\n");
-  // print_list(front);
+  printf("\n=================debgugging remove_node=============\n");
+  struct node *front = make_node("a", "b");
+  for (i = 0; i < 26; i++) {
+    insert(front, alphabet + i, alphabet + (26 - i));
+  }
+  printf("linked list before any removals\n");
+  print_list(front);
+  //removing artist z's song (last song)
+  printf("removing artist %s, song %s\n", alphabet + 25, alphabet + 1);
+  remove_node(front, alphabet + 25, alphabet + 1); //removing the artist z
+
+  printf("list after removing z\n");
+  print_list(front);
+  //removing first song
+  printf("removing first node\n");
+  front = remove_node(front, "a", "b"); //removing the artist z
+
+  printf("list after removing first node\n");
+  print_list(front);
+  //removing random nodes
+  int rands;
+  for (i = 0; i < 26; i++) {
+    rands = rand()%26;
+    printf("removing artist %s, song %s\n", alphabet + rands, alphabet + 26 - rands);
+    front = remove_node(front, alphabet + rands, alphabet + 26 - rands); //removing the artist
+    printf("list after removing artist\n");
+    print_list(front);
+    printf("\n");
+  }
+  printf("list after removing random nodes\n");
+  print_list(front);
   printf("\n=================debgugging delete_song=============\n");
   printf("library before deleting any songs\n");
   print_library(lib);
