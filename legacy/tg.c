@@ -225,7 +225,7 @@ struct node * remove_node(struct node *front, char artist[], char song[]) {
   }
   else {
     previous->next = current->next;
-    printf("printing current_node... \n");
+    // printf("printing current_node... \n");
     print_node(current);
     free(current);
     current = NULL;
@@ -245,19 +245,23 @@ void delete_song(struct node *lib[], char artist[], char song[]) {
 void delete_nodes(struct node *lib[]) {
   int index = 0;
   while (index < 26) {
-    free_list(lib[index]);
+    lib[index] = free_list(lib[index]);
     index++;
   }
 }
 
 int main() {
   printf("\n"); //space between output of makefile and output of this file
-
-  // front = insert(front, "a", "b");
-  struct node *lib[26];
-  // struct node *front;// = add_song_node(lib, "b", "oh yeah baby");
-  srand(time(NULL));
   int i;
+  srand(time(NULL));
+
+  // printf("\n=================debgugging free_list=============\n");
+  // struct node *front;// = add_song_node(lib, "b", "oh yeah baby");
+  // front = insert(front, "a", "b");
+  // for (i = 0; i < 30; i++) {
+  //   insert(front, "a", "b");
+  // }
+  struct node *lib[26];
   char alphabet[] = "abcedfghijklmnopqrstuvwxyz";
   char *artists[26];
   char *songs[26];
@@ -289,50 +293,43 @@ int main() {
   // for (i = 0; i < 26; i++) {
   //   print_artist_song(lib, artists[i]);
   // }
-  printf("\n=================debgugging remove_node=============\n");
-  struct node *front = make_node("a", "b");
-  for (i = 0; i < 26; i++) {
-    insert(front, alphabet + i, alphabet + (26 - i));
-  }
-  printf("linked list before any removals\n");
-  print_list(front);
-  //removing artist z's song (last song)
-  printf("removing artist %s, song %s\n", alphabet + 25, alphabet + 1);
-  remove_node(front, alphabet + 25, alphabet + 1); //removing the artist z
-
-  printf("list after removing z\n");
-  print_list(front);
-  //removing first song
-  printf("removing first node\n");
-  front = remove_node(front, "a", "b"); //removing the artist z
-
-  printf("list after removing first node\n");
-  print_list(front);
-  //removing random nodes
-  int rands;
-  for (i = 0; i < 26; i++) {
-    rands = rand()%26;
-    printf("removing artist %s, song %s\n", alphabet + rands, alphabet + 26 - rands);
-    front = remove_node(front, alphabet + rands, alphabet + 26 - rands); //removing the artist
-    printf("list after removing artist\n");
-    print_list(front);
-    printf("\n");
-  }
-  printf("list after removing random nodes\n");
-  print_list(front);
-  printf("\n=================debgugging delete_song=============\n");
-  printf("library before deleting any songs\n");
+  // printf("\n=================debgugging remove_node=============\n");
+  // struct node *front = make_node("a", "b");
+  // for (i = 0; i < 26; i++) {
+  //   insert(front, alphabet + i, alphabet + (26 - i));
+  // }
+  // printf("linked list before any removals\n");
+  // print_list(front);
+  // //removing artist z's song (last song)
+  // printf("removing artist %s, song %s\n", alphabet + 25, alphabet + 1);
+  // remove_node(front, alphabet + 25, alphabet + 1); //removing the artist z
+  //
+  // printf("list after removing z\n");
+  // print_list(front);
+  // //removing first song
+  // printf("removing first node\n");
+  // front = remove_node(front, "a", "b"); //removing the artist z
+  //
+  // printf("list after removing first node\n");
+  // print_list(front);
+  // //removing random nodes
+  // int rands;
+  // for (i = 0; i < 26; i++) {
+  //   rands = rand()%26;
+  //   printf("removing artist %s, song %s\n", alphabet + rands, alphabet + 26 - rands);
+  //   front = remove_node(front, alphabet + rands, alphabet + 26 - rands); //removing the artist
+  //   printf("list after removing artist\n");
+  //   print_list(front);
+  //   printf("\n");
+  // }
+  // printf("list after removing random nodes\n");
+  // print_list(front);
+  printf("\n=================debgugging delete_nodes=============\n");
+  printf("library before deleting\n");
   print_library(lib);
-  printf("\n" );
-  // int rand_num;
-  for (i = 0; i < 26; i++) {
-    // rand_num = rand()%26;
-    printf("\ndeleting artist %s, song %s\n", artists[i], songs[i]);
-    delete_song(lib, artists[i], songs[i]);
-    printf("\nlibrary after deleting node for %dth time\n", i);
-    print_library(lib);
-  }
-  printf("library after deleting random nodes\n");
+  printf("library after deleting\n");
+  delete_nodes(lib);
+  print_library(lib);
   //end of debuggin
   // for (i = 0; i < 26; i++) {
   //   free_list(lib[i]);
