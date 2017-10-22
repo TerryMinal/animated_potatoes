@@ -51,11 +51,11 @@ struct node * free_list(struct node *node) {
 // in the case that the node is inserted at the beginning, return the node. Else, return the front
 // this is to guarantee that there will always be a pointer to the front
 struct node * insert(struct node *current_node, char artist[], char song[]) {
-  
+
 }
-  /*  struct node *ret_node = current_node; 
+  /*  struct node *ret_node = current_node;
   struct node *node = make_node(artist, song);
-  struct node *previous = malloc(sizeof(struct node));*/ 
+  struct node *previous = malloc(sizeof(struct node));*/
 
   /*
   if (current_node || ( strcmp(artist, current_node->artist) < 0 ) ) {
@@ -68,15 +68,15 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
 	break;
       }
     }
-    previous = current_node; 
-    current_node = current_node->next; 
+    previous = current_node;
+    current_node = current_node->next;
   }
 
   node->next = current_node;
   previous->next = node;
-  return ret_node; 
+  return ret_node;
   }*/
-  
+
 
 
 
@@ -90,15 +90,15 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
       while ( strcmp(song, current_node->song) > 0 ) {
 	current_node = current_node -> next;
       }
-      node->next = current_node; 
+      node->next = current_node;
       previous->next = node;
-      //return insert_front(current_artist, ar; 
+      //return insert_front(current_artist, ar;
     }
 
     if ( strcmp(artist, current_node->artist) < 0 ){
       return insert_front(current_node, artist, song);
-    } 
-    
+    }
+
     else {
       previous = current_node;
       current_node = current_node->next;
@@ -106,10 +106,10 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
   }
   //node->next = previous->next;
   previous->next = insert_front(current_node, artist, song);
-  return ret_node; 
+  return ret_node;
 }
-  
-  /*   
+
+  /*
   //case where there is no node in the linked list
   if (current_node == NULL)  {
     current_node = node;
@@ -225,7 +225,7 @@ struct node * remove_node(char artist[], char song[], struct node *front) {
   struct node * previous = front;
 
   //If the node that needs to be removed is the first node in the list:
-  if ( ( strcmp (front->song, song) == 0 ) && ( strcmp (front->artist, artist) ) == 0) {
+  if ( ( strcmp (front->song, song) == 0 ) && ( strcmp (front->artist, artist)  == 0) ) {
     front  = front->next;
     free(current); //freeing current b/c its a temp var holding front
 
@@ -266,7 +266,7 @@ int main() {
   print_list(front);
   front = insert(front, "ab", "avdc");
   print_list(front);
-   
+
 //   front->value = 0;
 //   front->next = NULL;
 //   int i;

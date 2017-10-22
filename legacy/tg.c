@@ -19,9 +19,9 @@ struct node {
 
 void print_node(struct node *node) {
   if (node == NULL)
-    printf("The node is null\n");
+  printf("The node is null\n");
   else
-    printf(" artist: %s | song: %s \n" , node->artist, node->song);
+  printf(" artist: %s | song: %s \n" , node->artist, node->song);
 }
 
 void print_list(struct node *current_node) {
@@ -85,7 +85,7 @@ struct node * return_node(struct node *current_node, char artist[], char song[])
   struct node *ret_node = NULL;
   while (current_node != NULL) {
     if (strcmp(current_node->artist, artist) == 0 && strcmp(current_node->song, song) == 0)
-       ret_node = current_node;
+      ret_node = current_node;
     current_node = current_node->next;
   }
   return ret_node;
@@ -96,10 +96,36 @@ struct node * return_first_song(struct node *current_node, char artist[]) {
   struct node *ret_node = NULL;
   while (current_node != NULL) {
     if (strcmp(current_node->artist, artist) == 0)
-       ret_node = current_node;
+    ret_node = current_node;
     current_node = current_node->next;
   }
   return ret_node;
+}
+
+struct node * return_random(struct node * front) {
+  //Seed the random number picker with the time
+  srand(time(NULL));
+  //Pick a random number in the range of 0-10
+  int rand_num;
+  printf("Random number: %d\n", rand_num);
+  struct node * temp_node = front;
+  //Iterate through the linked list for a rand_num amount of times.
+  //Return the node that rand_num stopped at.
+  rand_num = rand()%10;
+  while (rand_num) {
+    if (temp_node == NULL) //if it reached the end of the linked list go back to the front
+      temp_node = front;
+    temp_node = temp_node->next;
+    rand_num--;
+  }
+  //if the rand temp_node is NULL cycle through till you find the next node
+  while (temp_node != NULL) {
+    if (temp_node == NULL)
+      temp_node = front;
+    else
+      temp_node = temp_node->next;
+  }
+  return temp_node;
 }
 
 struct node * free_list(struct node *node) {
@@ -112,6 +138,61 @@ struct node * free_list(struct node *node) {
   return NULL;
 }
 
+//terry
+// search for a song given song and artist name
+struct node * search(struct node *lib[], char artist[], char song[]) {
+  int index = (int) ((artist[0]) - 'a'); //taking advantage of every character being an int... set index through subtraction of different ascii values
+  struct node *current_node = lib[index];
+  while (current_node != NULL) {
+    if (strcmp(current_node->song, song) == 0)
+      return current_node;
+    current_node = current_node->next;
+  }
+  return NULL; //if there is no node with given parameters, return NULL
+}
+
+//terry
+// print out all entries under a certain letter
+void print_under_letter(struct node *lib[], char letter) {
+  int index = (int) (letter - 'a'); //set index through subtraction of ascii values
+  printf("linked list of %c:\n");
+  print_list(lib[index]);
+}
+
+//terry
+// prints out the whole library
+void print_library(struct node *lib[]) {
+  char alphabet[] = "abcedfghijklmnopqrstuvwxyz";
+  int i;
+  for (i = 0; i < 26; i++) {
+    print_under_letter(lib, alphabet[i]);
+  }
+}
+
+//terry
+// print out a series of randomly chosen songs
+void shuffle(struct node *lib[]) {
+  srand(time(NULL));
+  int n;
+  int i;
+  int rand_num;
+  for (n = 0; n < 3; n++) {
+    i = 0;
+    rand_num = rand()%26;
+    //makes sure to find a part in the array that has nodes
+    while (lib[rand_num] != NULL) {
+      if (i >= 25) //if it traversed the whole list and it didn't find anything
+        printf("there are no nodes in this library");
+      i++;
+      rand_num = (rand_num + 1)%26;
+      printf("%d\n", rand_num);
+    }
+    printf("node: ");
+    print_node(return_random(lib[rand_num]));
+  }
+}
+
+
 int main() {
   printf("\n"); //space between output of makefile and output of this file
 
@@ -122,15 +203,32 @@ int main() {
   srand(time(NULL));
   int i;
   char alphabet[] = "abcedfghijklmnopqrstuvwxyz";
+  char *artist[26];
+  char *songs[26];
   for (i = 0; i < 26; i++) {
     lib[i] = NULL;
   }
   for (i = 0; i < 26; i++) {
     char *art = &(alphabet[ (int) (rand()%26) ]);
     char *son = &(alphabet[ (int) (rand()%26) ]);
-    printf("inserting artist: %s, inserting song: %s, for the %d time\n", art, son, i);
+    artist[i] = art;
+    songs[i] = son;
+    // printf("inserting artist: %s, inserting song: %s, for the %d time\n", art, son, i);
     add_song_node(lib, art , son);
   }
+  // printf("\n=================debgugging search=============\n");
+  // for (i = 0; i < 26; i++) {
+  //   print_node(search(lib, artist[i], songs[i]));
+  // }
+  printf("\n=================debgugging shuffle=============\n");
+  shuffle(lib);
+  // printf("\n=================debgugging print_under_letter=============\n");
+  // for (i = 0; i < 26; i++) {
+  //   print_under_letter(lib, alphabet[i]);
+  // }
+  // printf("\n=================debgugging print_library=============\n");
+  // print_library(lib);
+
   // print_list(front);
   // printf("debugging return_node...\n");
   // struct node *d = return_node(front, "a", "b");
