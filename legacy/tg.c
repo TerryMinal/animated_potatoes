@@ -69,27 +69,6 @@ struct node * insert(struct node *current_node, char artist[], char song[]) {
   }
 }
 
-struct node * add_song_node(struct node *lib[], char artist[], char song[]) {
-
-  int index = (int)((artist[0] - 'a')); //taking advantage of every character being an int... set index through subtraction of different ascii values
-  //if there is no linked list present in this index, make a new node
-  // printf("%d\n", index);
-  // lib[i] = insert(lib[i], art, son);
-  lib[index] = insert(lib[index], artist, song);
-  return lib[index];
-}
-
-struct node * search(struct node *lib[], char artist[], char song[]) {
-  int index = (int) ((artist[0]) - 'a'); //taking advantage of every character being an int... set index through subtraction of different ascii values
-  struct node *current_node = lib[index];
-  while (current_node != NULL) {
-    if (strcmp(current_node->song, song) == 0)
-    return current_node;
-    current_node = current_node->next;
-  }
-  return NULL; //if there is no node with given parameters, return NULL
-}
-
 
 //returns node based on artist and song
 struct node * return_node(struct node *current_node, char artist[], char song[]) {
@@ -113,34 +92,6 @@ struct node * return_first_song(struct node *current_node, char artist[]) {
   return ret_node;
 }
 
-void print_under_letter(struct node *lib[], char letter) {
-  int index = letter -'a';
-  print_list(lib[index]);
-}
-
-void print_library(struct node *lib[]) {
-  int i;
-  for (i = 0; i < 26; i++) {
-    print_list(lib[i]);
-  }
-}
-void print_artist_song(struct node *lib[], char artist[]) {
-  int index = (int)(artist[0] - 'a');
-  struct node * current_node = lib[index];
-  if (current_node == NULL) { //in the case there are no nodes in the library with this artist
-    printf("this artist is not in the library");
-    return;
-  }
-  printf("Songs by %s: \n", artist);
-  while (current_node != NULL) {
-    if ( strcmp(current_node->artist, artist) == 0) {
-      printf("%s\n", current_node->song);
-    }
-    current_node = current_node->next;
-  }
-}
-
-
 struct node * return_random(struct node * front) {
   //Seed the random number picker with the time
   srand(time(NULL));
@@ -159,24 +110,6 @@ struct node * return_random(struct node * front) {
   }
 
   return temp_node;
-}
-
-void shuffle(struct node *lib[]) {
-  srand(time(NULL));
-  //Pick a random number in the range of 0-10
-  int rand_num = rand()%26;
-  int i = 0;
-  while (lib[rand_num] == NULL) {
-    if (i > 25) {
-      printf("there exists no node in the library");
-      return;
-    }
-    printf("%s\n", lib[rand_num]->artist);
-    rand_num = (rand_num + 1)%26;
-    i++;
-  }
-  struct node *node = return_random(lib[rand_num]);
-  print_node(node);
 }
 
 struct node * free_list(struct node *node) {
@@ -209,12 +142,11 @@ struct node * remove_node(struct node *front, char artist[], char song[]) {
   while ( current != NULL ) {
     if (strcmp(current->artist, artist) == 0) {
       if (strcmp(current->song, song) == 0)
-        break;
+      break;
     }
     previous = current;
     current = current->next;
   }
-
   //When loop is done:
   //Set the next node of the node before the target to the node after the target.
   //EX: A->B->C, Want to remove B, Set A's next node to C and remove B : A->C
@@ -231,6 +163,74 @@ struct node * remove_node(struct node *front, char artist[], char song[]) {
     current = NULL;
     return front;
   }
+}
+
+
+struct node * add_song_node(struct node *lib[], char artist[], char song[]) {
+
+  int index = (int)((artist[0] - 'a')); //taking advantage of every character being an int... set index through subtraction of different ascii values
+  //if there is no linked list present in this index, make a new node
+  // printf("%d\n", index);
+  // lib[i] = insert(lib[i], art, son);
+  lib[index] = insert(lib[index], artist, song);
+  return lib[index];
+}
+
+struct node * search(struct node *lib[], char artist[], char song[]) {
+  int index = (int) ((artist[0]) - 'a'); //taking advantage of every character being an int... set index through subtraction of different ascii values
+  struct node *current_node = lib[index];
+  while (current_node != NULL) {
+    if (strcmp(current_node->song, song) == 0)
+    return current_node;
+    current_node = current_node->next;
+  }
+  return NULL; //if there is no node with given parameters, return NULL
+}
+
+void print_under_letter(struct node *lib[], char letter) {
+  int index = letter -'a';
+  print_list(lib[index]);
+}
+
+void print_library(struct node *lib[]) {
+  int i;
+  for (i = 0; i < 26; i++) {
+    print_list(lib[i]);
+  }
+}
+
+void print_artist_song(struct node *lib[], char artist[]) {
+  int index = (int)(artist[0] - 'a');
+  struct node * current_node = lib[index];
+  if (current_node == NULL) { //in the case there are no nodes in the library with this artist
+    printf("this artist is not in the library");
+    return;
+  }
+  printf("Songs by %s: \n", artist);
+  while (current_node != NULL) {
+    if ( strcmp(current_node->artist, artist) == 0) {
+      printf("%s\n", current_node->song);
+    }
+    current_node = current_node->next;
+  }
+}
+
+void shuffle(struct node *lib[]) {
+  srand(time(NULL));
+  //Pick a random number in the range of 0-10
+  int rand_num = rand()%26;
+  int i = 0;
+  while (lib[rand_num] == NULL) {
+    if (i > 25) {
+      printf("there exists no node in the library");
+      return;
+    }
+    printf("%s\n", lib[rand_num]->artist);
+    rand_num = (rand_num + 1)%26;
+    i++;
+  }
+  struct node *node = return_random(lib[rand_num]);
+  print_node(node);
 }
 
 // delete a song
