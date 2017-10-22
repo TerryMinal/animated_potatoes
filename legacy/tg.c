@@ -138,60 +138,6 @@ struct node * free_list(struct node *node) {
   return NULL;
 }
 
-//terry
-// search for a song given song and artist name
-struct node * search(struct node *lib[], char artist[], char song[]) {
-  int index = (int) ((artist[0]) - 'a'); //taking advantage of every character being an int... set index through subtraction of different ascii values
-  struct node *current_node = lib[index];
-  while (current_node != NULL) {
-    if (strcmp(current_node->song, song) == 0)
-      return current_node;
-    current_node = current_node->next;
-  }
-  return NULL; //if there is no node with given parameters, return NULL
-}
-
-//terry
-// print out all entries under a certain letter
-void print_under_letter(struct node *lib[], char letter) {
-  int index = (int) (letter - 'a'); //set index through subtraction of ascii values
-  printf("linked list of %c:\n");
-  print_list(lib[index]);
-}
-
-//terry
-// prints out the whole library
-void print_library(struct node *lib[]) {
-  char alphabet[] = "abcedfghijklmnopqrstuvwxyz";
-  int i;
-  for (i = 0; i < 26; i++) {
-    print_under_letter(lib, alphabet[i]);
-  }
-}
-
-//terry
-// print out a series of randomly chosen songs
-void shuffle(struct node *lib[]) {
-  srand(time(NULL));
-  int n;
-  int i;
-  int rand_num;
-  for (n = 0; n < 3; n++) {
-    i = 0;
-    rand_num = rand()%26;
-    //makes sure to find a part in the array that has nodes
-    while (lib[rand_num] != NULL) {
-      if (i >= 25) //if it traversed the whole list and it didn't find anything
-        printf("there are no nodes in this library");
-      i++;
-      rand_num = (rand_num + 1)%26;
-      printf("%d\n", rand_num);
-    }
-    printf("node: ");
-    print_node(return_random(lib[rand_num]));
-  }
-}
-
 
 int main() {
   printf("\n"); //space between output of makefile and output of this file
