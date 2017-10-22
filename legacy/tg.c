@@ -206,7 +206,11 @@ struct node * remove_node(struct node *front, char artist[], char song[]) {
   }
 
   //Else traverse through the list while the values of the current node is not the same as the values in the node that needs to be removed
-  while ( current != NULL && (strcmp(current->song, song) != 0) && (strcmp(current->artist, artist) != 0) ) {
+  while ( current != NULL ) {
+    if (strcmp(current->artist, artist) == 0) {
+      if (strcmp(current->song, song) == 0)
+        break;
+    }
     previous = current;
     current = current->next;
   }
@@ -221,6 +225,8 @@ struct node * remove_node(struct node *front, char artist[], char song[]) {
   }
   else {
     previous->next = current->next;
+    printf("printing current_node... \n");
+    print_node(current);
     free(current);
     current = NULL;
     return front;
